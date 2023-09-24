@@ -66,7 +66,7 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
 
-//https://developer.android.com/training/dependency-injection/hilt-android
+    //https://developer.android.com/training/dependency-injection/hilt-android
     implementation("com.google.dagger:hilt-android:2.48")
     kapt("com.google.dagger:hilt-android-compiler:2.48")
     //https://developer.android.com/training/dependency-injection/hilt-jetpack
