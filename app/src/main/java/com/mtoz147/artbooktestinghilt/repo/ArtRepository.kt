@@ -1,0 +1,41 @@
+package com.mtoz147.artbooktestinghilt.repo
+
+import androidx.lifecycle.LiveData
+import com.mtoz147.artbooktestinghilt.api.RetrofitAPI
+import com.mtoz147.artbooktestinghilt.model.Art
+import com.mtoz147.artbooktestinghilt.model.ImageResponse
+import com.mtoz147.artbooktestinghilt.roomdb.ArtDao
+import com.mtoz147.artbooktestinghilt.util.Resource
+import javax.inject.Inject
+
+class ArtRepository @Inject constructor(
+    private val artDao: ArtDao,
+    private val retrofitAPI: RetrofitAPI
+) :ArtRepositoryInterface{
+    override suspend fun inserArt(art: Art) {
+        artDao.insertArt(art)
+    }
+
+    override suspend fun deleteArt(art: Art) {
+        artDao.deleteArt(art)
+    }
+
+    override fun getArt(): LiveData<List<Art>> {
+        return artDao.observeArts()
+    }
+
+    override suspend fun searchImage(imageString: String): Resource<ImageResponse> {
+       return try {
+           val response=retrofitAPI.imageSearch(imageString)
+           if (response.isSuccessful){
+               response.body()?.let {
+                   return@let Resource.success(it)
+               }?:Resource.error("Error",null)
+           }else{
+               Resource.error("Error",null)
+           }
+       }catch (e:Exception){
+           Resource.error("No data!",null)
+       }
+    }
+}
