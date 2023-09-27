@@ -12,9 +12,9 @@ import com.mtoz147.artbooktestinghilt.model.Art
 @Dao
 interface ArtDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertArt(art: Art)
+   fun insertArt(art: Art)
     @Delete
-    suspend fun deleteArt(art: Art)
+    fun deleteArt(art: Art)
     @Query("SELECT * FROM arts")
     fun observeArts():LiveData<List<Art>>
 }

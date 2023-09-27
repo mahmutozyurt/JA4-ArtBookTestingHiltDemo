@@ -2,7 +2,13 @@ package com.mtoz147.artbooktestinghilt.dependencyinjection
 
 import android.content.Context
 import androidx.room.Room
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.mtoz147.artbooktestinghilt.R
 import com.mtoz147.artbooktestinghilt.api.RetrofitAPI
+import com.mtoz147.artbooktestinghilt.repo.ArtRepository
+import com.mtoz147.artbooktestinghilt.repo.ArtRepositoryInterface
+import com.mtoz147.artbooktestinghilt.roomdb.ArtDao
 import com.mtoz147.artbooktestinghilt.roomdb.ArtDatabase
 import com.mtoz147.artbooktestinghilt.util.Util.BASE_URL
 import dagger.Module
@@ -21,22 +27,36 @@ object AppModule {
     @Singleton
     @Provides
     fun injectRoomDatabase(
-        @ApplicationContext context:Context)=Room.databaseBuilder(
-            context,ArtDatabase::class.java,"ArtBookDB"
-        ).build()
+        @ApplicationContext context: Context,
+    ) = Room.databaseBuilder(
+        context, ArtDatabase::class.java, "ArtBookDB"
+    ).build()
 
     @Singleton
     @Provides
-    fun injectDao(database: ArtDatabase)=database.artDao()
+    fun injectDao(database: ArtDatabase) = database.artDao()
 
 
     @Singleton
     @Provides
-    fun injectRetrofitAPI():RetrofitAPI{
+    fun injectRetrofitAPI(): RetrofitAPI {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(BASE_URL)
             .build()
             .create(RetrofitAPI::class.java)
     }
+
+    @Singleton
+    @Provides
+    fun injectNormalRepo(dao: ArtDao, api: RetrofitAPI) =
+        ArtRepository(dao, api) as ArtRepositoryInterface
+
+    @Singleton
+    @Provides
+    fun injectGlide(@ApplicationContext context: Context) = Glide.with(context)
+        .setDefaultRequestOptions(
+            RequestOptions().placeholder(R.drawable.ic_launcher_foreground)
+                .error(R.drawable.ic_launcher_foreground)
+        )
 }

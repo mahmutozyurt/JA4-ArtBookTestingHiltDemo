@@ -4,8 +4,9 @@ plugins {
     id("androidx.navigation.safeargs")
     //Safe args Added, to be sure android.useAndroidX=true in your gradle.properties file
     // kotlin("kapt") version "1.9.10" kapt plugins added
-    id("org.jetbrains.kotlin.kapt")
+    //id("org.jetbrains.kotlin.kapt")
     id("com.google.dagger.hilt.android")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -42,6 +43,10 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
+    hilt {
+        enableAggregatingTask = true
+    }
 }
 
 dependencies {
@@ -68,9 +73,13 @@ dependencies {
 
     //https://developer.android.com/training/dependency-injection/hilt-android
     implementation("com.google.dagger:hilt-android:2.48")
-    kapt("com.google.dagger:hilt-android-compiler:2.48")
+    //kapt("com.google.dagger:hilt-android-compiler:2.48")
     //https://developer.android.com/training/dependency-injection/hilt-jetpack
     implementation("androidx.hilt:hilt-navigation-fragment:1.0.0")
+    ksp("com.google.dagger:hilt-android-compiler:2.48")
+    //annotationProcessor ("com.google.dagger:hilt-compiler:2.48")
+
+
 
     //lifecycle components added
     //https://developer.android.com/jetpack/androidx/releases/lifecycle
@@ -97,9 +106,12 @@ dependencies {
     annotationProcessor("androidx.room:room-compiler:$room_version")
     // To use Kotlin annotation processing tool (kapt)
     //https://kotlinlang.org/docs/kapt.html#annotation-processor-arguments
-    kapt("androidx.room:room-compiler:$room_version")
+    //kapt("androidx.room:room-compiler:$room_version")
     // optional - Kotlin Extensions and Coroutines support for Room
     implementation("androidx.room:room-ktx:$room_version")
+    //https://developer.android.com/build/migrate-to-ksp
+    //https://github.com/google/ksp/releases
+    ksp("androidx.room:room-compiler:$room_version")
 
 
     //retrofit components added
@@ -117,7 +129,8 @@ dependencies {
     //to download and to show picture from web (alternative picasso)
     //https://github.com/bumptech/glide
     implementation ("com.github.bumptech.glide:glide:4.16.0")
-    kapt("com.github.bumptech.glide:compiler:4.16.0")
+    //kapt("com.github.bumptech.glide:compiler:4.16.0")
+    ksp("com.github.bumptech.glide:compiler:4.16.0")
 
     // TestImplementations
     implementation ("androidx.test:core:1.5.0")
@@ -148,7 +161,8 @@ dependencies {
 
     androidTestImplementation ("org.mockito:mockito-core:4.7.0")
     androidTestImplementation ("com.google.dagger:hilt-android-testing:2.43.2")
-    kaptAndroidTest ("com.google.dagger:hilt-android-compiler:2.48")
+    //kaptAndroidTest ("com.google.dagger:hilt-android-compiler:2.48")
+    kspAndroidTest ("com.google.dagger:hilt-android-compiler:2.48")
 
     //https://developer.android.com/jetpack/androidx/releases/fragment
     debugImplementation ("androidx.fragment:fragment-testing:1.6.1")//new version is needed to sdk 34
