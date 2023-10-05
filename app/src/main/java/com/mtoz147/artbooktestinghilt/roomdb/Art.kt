@@ -1,4 +1,4 @@
-package com.mtoz147.artbooktestinghilt.model
+package com.mtoz147.artbooktestinghilt.roomdb
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

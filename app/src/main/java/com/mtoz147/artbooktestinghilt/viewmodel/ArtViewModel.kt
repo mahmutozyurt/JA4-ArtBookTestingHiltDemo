@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mtoz147.artbooktestinghilt.model.Art
+import com.mtoz147.artbooktestinghilt.roomdb.Art
 import com.mtoz147.artbooktestinghilt.model.ImageResponse
 import com.mtoz147.artbooktestinghilt.repo.ArtRepositoryInterface
 import com.mtoz147.artbooktestinghilt.util.Resource
@@ -44,16 +44,16 @@ class ArtViewModel @Inject constructor(
     fun setSelectedImage(url:String){
         selectedImage.postValue(url)
     }
-fun deleteArt(art: Art)=viewModelScope.launch {
+    fun deleteArt(art: Art)=viewModelScope.launch {
     repository.deleteArt(art)
 }
 
     fun insertArt(art: Art)=viewModelScope.launch {
-        repository.inserArt(art)
+        repository.insertArt(art)
     }
 
     fun makeArt(name:String, artistName:String,year:String){
-        if (name.isNullOrEmpty()||artistName.isNullOrEmpty()||year.isNullOrEmpty()){
+        if (name.isEmpty()||artistName.isEmpty()||year.isEmpty()){
             insertArtMsg.postValue(Resource.error("Enter name, artist, year",null))
             return
         }
@@ -64,7 +64,7 @@ fun deleteArt(art: Art)=viewModelScope.launch {
             insertArtMsg.postValue(Resource.error("Year should be number",null))
             return
         }
-        val art=Art(name,artistName,yearInt,selectedImage.value?:"")
+        val art= Art(name,artistName,yearInt,selectedImage.value?:"")
         insertArt(art)
         setSelectedImage("")
         insertArtMsg.postValue(Resource.success(art))

@@ -7,16 +7,17 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
 import com.mtoz147.artbooktestinghilt.databinding.ArtRowBinding
-import com.mtoz147.artbooktestinghilt.model.Art
+import com.mtoz147.artbooktestinghilt.roomdb.Art
 import javax.inject.Inject
 
 
 class ArtRecyclerAdapter @Inject constructor(
-    private val glide:RequestManager
-):RecyclerView.Adapter<ArtRecyclerAdapter.ArtViewHolder>(){
+    val glide: RequestManager,
+) : RecyclerView.Adapter<ArtRecyclerAdapter.ArtViewHolder>() {
 
 
-    inner class ArtViewHolder(private val binding: ArtRowBinding):RecyclerView.ViewHolder(binding.root){
+    inner class ArtViewHolder(private val binding: ArtRowBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(art: Art) {
             binding.apply {
@@ -33,25 +34,28 @@ class ArtRecyclerAdapter @Inject constructor(
 
 
     //It calculates the difference between two lists and updates the ones that are different.
-    private val diffUtil=object : DiffUtil.ItemCallback<Art>(){
+    private val diffUtil = object : DiffUtil.ItemCallback<Art>() {
         override fun areItemsTheSame(oldItem: Art, newItem: Art): Boolean {
-            return oldItem==newItem
+            return oldItem == newItem
         }
 
         override fun areContentsTheSame(oldItem: Art, newItem: Art): Boolean {
-            return oldItem==newItem
+            return oldItem == newItem
         }
     }
 
-    private val recyclerListDiffer= AsyncListDiffer(this,diffUtil)
+    private val recyclerListDiffer = AsyncListDiffer(this, diffUtil)
 
-    var arts:List<Art>
+    var arts: List<Art>
         get() = recyclerListDiffer.currentList
         set(value) = recyclerListDiffer.submitList(value)
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArtViewHolder {
-        val binding=ArtRowBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding = ArtRowBinding.inflate(
+            LayoutInflater
+                .from(parent.context), parent, false
+        )
         return ArtViewHolder(binding)
     }
 

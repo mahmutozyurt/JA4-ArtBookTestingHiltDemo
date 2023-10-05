@@ -7,12 +7,11 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query*/
-import com.mtoz147.artbooktestinghilt.model.Art
 
 @Dao
 interface ArtDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-   fun insertArt(art: Art)
+      fun insertArt(art: Art)
     @Delete
     fun deleteArt(art: Art)
     @Query("SELECT * FROM arts")

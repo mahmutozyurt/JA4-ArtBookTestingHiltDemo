@@ -54,7 +54,8 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun injectGlide(@ApplicationContext context: Context) = Glide.with(context)
+    fun injectGlide(@ApplicationContext context: Context) = Glide
+        .with(context)
         .setDefaultRequestOptions(
             RequestOptions().placeholder(R.drawable.ic_launcher_foreground)
                 .error(R.drawable.ic_launcher_foreground)

@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
-import com.mtoz147.artbooktestinghilt.databinding.ArtRowBinding
+
 import com.mtoz147.artbooktestinghilt.databinding.ImageRowBinding
-import com.mtoz147.artbooktestinghilt.model.Art
+
 import javax.inject.Inject
 
 class ImageRecyclerAdapter @Inject constructor(

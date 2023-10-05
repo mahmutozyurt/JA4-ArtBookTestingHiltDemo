@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -19,12 +20,12 @@
 
     <EditText
         android:id="@+id/nameText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="309dp"
+        android:layout_height="55dp"
         android:layout_marginBottom="59dp"
         android:ems="10"
         android:hint="Please Enter Name"
-        android:inputType="text"
+        android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/artistText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,25 +33,25 @@
 
     <EditText
         android:id="@+id/artistText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="304dp"
+        android:layout_height="52dp"
         android:layout_marginStart="2dp"
         android:layout_marginBottom="61dp"
         android:ems="10"
         android:hint="Please Enter Artist Name"
-        android:inputType="text"
+        android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/yearText"
         app:layout_constraintStart_toStartOf="@+id/nameText"
         app:layout_constraintTop_toBottomOf="@+id/nameText" />
 
     <EditText
         android:id="@+id/yearText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="52dp"
         android:layout_marginBottom="62dp"
         android:ems="10"
         android:hint="Please Enter the Year"
-        android:inputType="text"
+        android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/btnSave"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

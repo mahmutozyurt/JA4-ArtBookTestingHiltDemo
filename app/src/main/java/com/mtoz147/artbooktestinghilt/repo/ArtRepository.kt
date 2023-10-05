@@ -2,7 +2,7 @@ package com.mtoz147.artbooktestinghilt.repo
 
 import androidx.lifecycle.LiveData
 import com.mtoz147.artbooktestinghilt.api.RetrofitAPI
-import com.mtoz147.artbooktestinghilt.model.Art
+import com.mtoz147.artbooktestinghilt.roomdb.Art
 import com.mtoz147.artbooktestinghilt.model.ImageResponse
 import com.mtoz147.artbooktestinghilt.roomdb.ArtDao
 import com.mtoz147.artbooktestinghilt.util.Resource
@@ -12,7 +12,7 @@ class ArtRepository @Inject constructor(
     private val artDao: ArtDao,
     private val retrofitAPI: RetrofitAPI
 ) :ArtRepositoryInterface{
-    override suspend fun inserArt(art: Art) {
+    override suspend fun insertArt(art: Art) {
         artDao.insertArt(art)
     }
 
@@ -20,7 +20,7 @@ class ArtRepository @Inject constructor(
         artDao.deleteArt(art)
     }
 
-    override fun getArt(): LiveData<List<Art>> {
+    override  fun getArt(): LiveData<List<Art>> {
         return artDao.observeArts()
     }
 
